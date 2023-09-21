@@ -33,7 +33,7 @@ if(isset($_REQUEST['period'])) {
     $view->assign('period', $_REQUEST['period']);
 }
 
-if(isset($_REQUEST['brand_name'])) {
+if(isset($_REQUEST['brand'])) {
     $view->assign('brand_name', $brand_name);
 }
 
