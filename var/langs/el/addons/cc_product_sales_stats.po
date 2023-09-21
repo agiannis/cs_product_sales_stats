@@ -1,0 +1,18 @@
+msgid ""
+msgstr "Project-Id-Version: tygh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Greek\n"
+"Language: el_GR"
+
+msgctxt "Addons::name::cc_product_sales_stats"
+msgid "(CSCart.Click) Product Sales Statistics "
+msgstr "(CSCart.Click) Στατιστικά πωλήσεων για τα προϊόντα"
+
+msgctxt "Addons::description::cc_product_sales_stats"
+msgid "Shows the amount of products sold. Can be filtered by brand,date,order status etc"
+msgstr "Εμφανίζει την ποσότητα των προϊόντων που πωλήθηκαν. Μπορεί να φιλτραριστεί κατά μάρκα, ημερομηνία, κατάσταση παραγγελίας κ.λπ."
+
+
+msgctxt "Languages::cc_product_sales_stats.stats_of_product_sales"
+msgid "Statistics of product sales"
+msgstr "Στατιστικά στοιχεία πωλήσεων προϊόντων"

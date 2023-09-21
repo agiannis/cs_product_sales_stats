@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<addon scheme="4.0">
+    <id>cc_product_sales_stats</id>
+    <version>1.0.0</version>
+    <priority>4294967395</priority>
+    <position>0</position>
+    <supplier>CSCart.Click</supplier>
+    <supplier_link>https://cscart.click</supplier_link>
+    <status>active</status>
+    <compatibility>
+        <core_version>
+            <min>4.11.3</min>
+        </core_version>
+    </compatibility>
+</addon>
