@@ -19,4 +19,8 @@ msgstr "Στατιστικά στοιχεία πωλήσεων προϊόντω�
 
 msgctxt "Languages::cc_product_sales_stats.out_of_stock"
 msgid "Out of stock"
-msgstr "Χωρίς αποθέματος"
+msgstr "Χωρίς απόθεμα"
+
+msgctxt "Languages::cc_product_sales_stats.active_products"
+msgid "Active products"
+msgstr "Ενεργά προϊόντα"

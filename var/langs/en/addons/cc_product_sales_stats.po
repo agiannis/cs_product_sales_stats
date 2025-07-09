@@ -20,3 +20,7 @@ msgstr "Statistics of product sales"
 msgctxt "Languages::cc_product_sales_stats.out_of_stock"
 msgid "Out of stock"
 msgstr "Out of stock"
+
+msgctxt "Languages::cc_product_sales_stats.active_products"
+msgid "Active products"
+msgstr "Active products"

@@ -135,12 +135,17 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" >{__("inventory")}:</label>
+                    <label class="control-label" >{__("filters")}:</label>
                     <div class="controls checkbox-list">
                         <label>
                             <input type="hidden" name="out_of_stock" value="N" />
                             <input type="checkbox" name="out_of_stock" value="Y" {if $search.out_of_stock == "Y"}checked="checked"{/if} />
                             {__("cc_product_sales_stats.out_of_stock")}
+                        </label>
+                        <label>
+                            <input type="hidden" name="active_products" value="N" />
+                            <input type="checkbox" name="active_products" value="Y" {if $search.active_products == "Y"}checked="checked"{/if} />
+                            {__("cc_product_sales_stats.active_products")}
                         </label>
                     </div>
                 </div>
