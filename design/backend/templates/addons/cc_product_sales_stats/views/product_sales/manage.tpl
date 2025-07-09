@@ -134,6 +134,16 @@
                         {include file="common/status.tpl" status=$search.status display="checkboxes" name="status" columns=5}
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label" >{__("inventory")}:</label>
+                    <div class="controls checkbox-list">
+                        <label>
+                            <input type="hidden" name="out_of_stock" value="N" />
+                            <input type="checkbox" name="out_of_stock" value="Y" {if $search.out_of_stock == "Y"}checked="checked"{/if} />
+                            {__("cc_product_sales_stats.out_of_stock")}
+                        </label>
+                    </div>
+                </div>
             {/capture}
             {include file="common/advanced_search.tpl"
             no_adv_link=true

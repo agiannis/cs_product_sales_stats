@@ -16,3 +16,7 @@ msgstr "Shows the amount of products sold. Can be filtered by brand,date,order s
 msgctxt "Languages::cc_product_sales_stats.stats_of_product_sales"
 msgid "Statistics of product sales"
 msgstr "Statistics of product sales"
+
+msgctxt "Languages::cc_product_sales_stats.out_of_stock"
+msgid "Out of stock"
+msgstr "Out of stock"

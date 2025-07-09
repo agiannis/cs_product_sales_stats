@@ -32,6 +32,11 @@ function fn_get_product_orders_per_brands($params): array
         $condition .= db_quote(' AND ?:orders.status IN (?a)', $params['status']);
     }
 
+    // Add out of stock filter
+    if (!empty($params['out_of_stock']) && $params['out_of_stock'] == 'Y') {
+        $condition .= ' AND ?:products.amount <= 0';
+    }
+
     $sorting = sprintf(
         'ORDER BY %s %s',
         $params['sort_by'] ?? 'inventory',

@@ -16,3 +16,7 @@ msgstr "Εμφανίζει την ποσότητα των προϊόντων π�
 msgctxt "Languages::cc_product_sales_stats.stats_of_product_sales"
 msgid "Statistics of product sales"
 msgstr "Στατιστικά στοιχεία πωλήσεων προϊόντων"
+
+msgctxt "Languages::cc_product_sales_stats.out_of_stock"
+msgid "Out of stock"
+msgstr "Χωρίς αποθέματος"
