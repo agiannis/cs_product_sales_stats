@@ -24,7 +24,7 @@ function fn_get_product_orders_per_brands($params): array
         CART_LANGUAGE);
     $join .= " INNER JOIN ?:products ON ?:products.product_id = ?:order_details.product_id";
 
-    if ($params['simple_list'] !== 'Y') {
+    if ($params['simple_list'] !== 'Y' || !empty($params['brand'])) {
 
         $fields[] = '?:product_features_values.variant_id';
         $fields[] = '?:product_feature_variant_descriptions.variant';
@@ -66,6 +66,7 @@ function fn_get_product_orders_per_brands($params): array
         $params['sort_order'] ?? 'DESC'
     );
 
+    fn_set_hook('get_product_orders_per_brands', $params, $fields, $join, $condition, $group, $sorting, $limit);
 
     $products = db_get_array('SELECT ' . implode(', ',
             $fields) . " FROM ?:order_details $join WHERE 1 $condition $group $sorting $limit");

@@ -34,7 +34,6 @@
         <input type="hidden" name="fake" value="1"/>
         <input type="hidden" name="user_type" value="{$smarty.request.user_type}"/>
 
-
         {assign var="c_url" value=$config.current_url|fn_query_remove:"sort_by":"sort_order"}
 
         {if $brands_products}
@@ -116,6 +115,7 @@
     <div class="sidebar-row">
         <form action="{""|fn_url}" method="get" name="report_form">
             <h6>{__("search")}</h6>
+            {hook name="cc_product_sales_stats:sidebar"}{/hook}
             {capture name="simple_search"}
                 <input type="hidden" name="selected_section" value="">
                 <div class="control-group">
