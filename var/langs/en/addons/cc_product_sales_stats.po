@@ -24,3 +24,7 @@ msgstr "Out of stock"
 msgctxt "Languages::cc_product_sales_stats.active_products"
 msgid "Active products"
 msgstr "Active products"
+
+msgctxt "Languages::cc_product_sales_stats.simple_list"
+msgid "Simple List"
+msgstr "Simple List"

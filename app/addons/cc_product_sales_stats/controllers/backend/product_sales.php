@@ -35,8 +35,5 @@ if(isset($_REQUEST['period'])) {
 
 if(isset($_REQUEST['brand'])) {
     $view->assign('brand_name', $brand_name);
-}
-
-if(isset($_REQUEST['brand'])) {
     $view->assign('brand_id',$_REQUEST['brand']);
 }

@@ -1,23 +1,27 @@
 {literal}
-<style>
-    .object-selector {
-        width: 100%;
-    }
-    @media print {
-        .admin-content-wrap .sidebar .sidebar-wrapper {
-            width: 359px;
+    <style>
+        .object-selector {
+            width: 100%;
         }
-        .navbar-admin-top {
-            display: none;
+
+        @media print {
+            .admin-content-wrap .sidebar .sidebar-wrapper {
+                width: 359px;
+            }
+
+            .navbar-admin-top {
+                display: none;
+            }
+
+            .actions .title h2 {
+                display: none;
+            }
+
+            a[href]:after {
+                content: none !important;
+            }
         }
-        .actions .title h2 {
-            display: none;
-        }
-        a[href]:after {
-            content: none !important;
-        }
-    }
-</style>
+    </style>
 {/literal}
 {capture name="mainbox"}
 
@@ -25,10 +29,10 @@
     {assign var="c_icon" value="<i class=\"exicon-`$search.sort_order_rev`\"></i>"}
     {assign var="c_dummy" value="<i class=\"exicon-dummy\"></i>"}
     {assign var="rev" value=$smarty.request.content_id|default:"product_sales"}
-
-    <form action="{""|fn_url}" method="post" name="userlist_form" id="userlist_form" class="{if $runtime.company_id && !"ULTIMATE"|fn_allowed_for}cm-hide-inputs{/if}">
-        <input type="hidden" name="fake" value="1" />
-        <input type="hidden" name="user_type" value="{$smarty.request.user_type}" />
+    <form action="{""|fn_url}" method="post" name="userlist_form" id="userlist_form"
+          class="{if $runtime.company_id && !"ULTIMATE"|fn_allowed_for}cm-hide-inputs{/if}">
+        <input type="hidden" name="fake" value="1"/>
+        <input type="hidden" name="user_type" value="{$smarty.request.user_type}"/>
 
 
         {assign var="c_url" value=$config.current_url|fn_query_remove:"sort_by":"sort_order"}
@@ -38,27 +42,47 @@
                 <thead>
                 <tr>
                     <th style="width: 10%;" class="nowrap">{__("product_code")}</th>
-                    <th style="width: 70%;"  class="nowrap">{__("name")}</th>
+                    <th style="width: 70%;" class="nowrap">{__("name")}</th>
                     <th style="width: 10%;" class="nowrap">
-                        <a class="cm-ajax" href="{"`$c_url`&sort_by=amount&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("amount")}{if $search.sort_by == "amount"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}
+                        <a class="cm-ajax"
+                           href="{"`$c_url`&sort_by=amount&sort_order=`$search.sort_order_rev`"|fn_url}"
+                           data-ca-target-id={$rev}>{__("amount")}{if $search.sort_by == "amount"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}
                     </th>
-                    <th style="width: 10%;" class="nowrap"><a class="cm-ajax" href="{"`$c_url`&sort_by=inventory&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("inventory")}{if $search.sort_by == "inventory"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}</th>
+                    <th style="width: 10%;" class="nowrap"><a class="cm-ajax"
+                                                              href="{"`$c_url`&sort_by=inventory&sort_order=`$search.sort_order_rev`"|fn_url}"
+                                                              data-ca-target-id={$rev}>{__("inventory")}{if $search.sort_by == "inventory"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}
+                    </th>
                 </tr>
                 </thead>
-                {foreach from=$brands_products item=brands_product}
-                    <tr>
-                        <th colspan="4">
-                            <h3>{$brands_product[0].variant}</h3></th>
-                    </tr>
-                    {foreach from=$brands_product item=product}
+                {if $search.simple_list !== "Y"}
+                    {foreach from=$brands_products item=brands_product}
+                        <tr>
+                            <th colspan="4">
+                                <h3>{$brands_product[0].variant}</h3></th>
+                        </tr>
+                        {foreach from=$brands_product item=product}
+                            <tr>
+                                <td>{$product.product_code}</td>
+                                <td><a target="_blank"
+                                       href="{"products.update&product_id=`$product.product_id`"|fn_url}">{$product.product}</a>
+                                </td>
+                                <td>{$product.amount}</td>
+                                <td>{$product.inventory}</td>
+                            </tr>
+                        {/foreach}
+                    {/foreach}
+                {else}
+                    {foreach from=$brands_products item=product}
                         <tr>
                             <td>{$product.product_code}</td>
-                            <td><a target="_blank" href="{"products.update&product_id=`$product.product_id`"|fn_url}">{$product.product}</a></td>
+                            <td><a target="_blank"
+                                   href="{"products.update&product_id=`$product.product_id`"|fn_url}">{$product.product}</a>
+                            </td>
                             <td>{$product.amount}</td>
                             <td>{$product.inventory}</td>
                         </tr>
                     {/foreach}
-                {/foreach}
+                {/if}
             </table>
         {else}
             <p class="no-items">{__("no_data")}</p>
@@ -69,7 +93,7 @@
             {if $users}
                 {capture name="tools_list"}
                     {if "ULTIMATE"|fn_allowed_for || !$runtime.company_id}
-                            <li>{btn type="list" text=__("export_selected") dispatch="dispatch[profiles.export_range]" form="userlist_form"}</li>
+                        <li>{btn type="list" text=__("export_selected") dispatch="dispatch[profiles.export_range]" form="userlist_form"}</li>
                     {/if}
                     <li>{btn type="delete_selected" dispatch="dispatch[profiles.m_delete]" form="userlist_form"}</li>
                 {/capture}
@@ -96,7 +120,7 @@
                 <input type="hidden" name="selected_section" value="">
                 <div class="control-group">
                     <label class="control-label" for="brand_select">{$brand_feat_name}:</label>
-                    <input type="hidden" name="brand_id" id="brand_id" value="{$brand_id}" />
+                    <input type="hidden" name="brand_id" id="brand_id" value="{$brand_id}"/>
                     <div class="controls">
                         <input type="hidden" name="brand" value=""/>
                         <div class="object-selector">
@@ -117,16 +141,16 @@
                         </div>
                     </div>
                 </div>
-                {literal}
-                    <script>
-                        $(function () {
-                            $(window).load(function () {
-                                $("#brand_select").val($("#brand_id").val());
-                            });
-
+            {literal}
+                <script>
+                    $(function () {
+                        $(window).load(function () {
+                            $("#brand_select").val($("#brand_id").val());
                         });
-                    </script>
-                {/literal}
+
+                    });
+                </script>
+            {/literal}
                 {include file="common/period_selector.tpl" period=$period display="form"}
                 <div class="control-group">
                     <label class="control-label">{__("order_status")}:</label>
@@ -135,17 +159,25 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" >{__("filters")}:</label>
+                    <label class="control-label">{__("filters")}:</label>
                     <div class="controls checkbox-list">
                         <label>
-                            <input type="hidden" name="out_of_stock" value="N" />
-                            <input type="checkbox" name="out_of_stock" value="Y" {if $search.out_of_stock == "Y"}checked="checked"{/if} />
+                            <input type="hidden" name="out_of_stock" value="N"/>
+                            <input type="checkbox" name="out_of_stock" value="Y"
+                                   {if $search.out_of_stock == "Y"}checked="checked"{/if} />
                             {__("cc_product_sales_stats.out_of_stock")}
                         </label>
                         <label>
-                            <input type="hidden" name="active_products" value="N" />
-                            <input type="checkbox" name="active_products" value="Y" {if $search.active_products == "Y"}checked="checked"{/if} />
+                            <input type="hidden" name="active_products" value="N"/>
+                            <input type="checkbox" name="active_products" value="Y"
+                                   {if $search.active_products == "Y"}checked="checked"{/if} />
                             {__("cc_product_sales_stats.active_products")}
+                        </label>
+                        <label>
+                            <input type="hidden" name="simple_list" value="N"/>
+                            <input type="checkbox" name="simple_list" value="Y"
+                                   {if $search.simple_list == "Y"}checked="checked"{/if} />
+                            {__("cc_product_sales_stats.simple_list")}
                         </label>
                     </div>
                 </div>
@@ -160,9 +192,9 @@
 {/capture}
 
 {include  file="common/mainbox.tpl"
-    box_id="product_sales"
-    title=__("cc_product_sales_stats.stats_of_product_sales")
-    content=$smarty.capture.mainbox
-    buttons=$smarty.capture.buttons
-    sidebar=$smarty.capture.sidebar
+box_id="product_sales"
+title=__("cc_product_sales_stats.stats_of_product_sales")
+content=$smarty.capture.mainbox
+buttons=$smarty.capture.buttons
+sidebar=$smarty.capture.sidebar
 }
